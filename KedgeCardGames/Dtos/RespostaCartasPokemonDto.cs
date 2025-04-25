@@ -66,6 +66,21 @@ namespace KedgeCardGames.Dtos
 
         [JsonPropertyName("images")]
         public ImagensDto Imagens { get; set; }
+
+        [JsonPropertyName("cardmarket")]
+        public MercadoCarta MercadoCartas { get; set; }
+    }
+
+    public class MercadoCarta
+    {
+        [JsonPropertyName("prices")]
+        public Preco Precos { get; set; }
+    }
+
+    public class Preco
+    {
+        [JsonPropertyName("lowPrice")]
+        public decimal MenorPreco { get; set; }
     }
 
     public class AtaqueDto
@@ -126,5 +141,5 @@ namespace KedgeCardGames.Dtos
 
         [JsonPropertyName("logo")]
         public string Logo { get; set; }
-    }
+    }   
 }
