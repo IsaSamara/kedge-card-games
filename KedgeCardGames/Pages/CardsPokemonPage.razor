@@ -23,10 +23,10 @@
             @foreach (var carta in cartas)
             {
                 <MudItem xs="2">
-                    <MudCard>
+                    <MudCard> 
                         <MudCardMedia Image="@carta.Imagens.Grande" Height="350" />
                         <MudCardContent>
-                            <MudText Typo="Typo.h6" Class="mb-2">@carta.Nome (#@carta.Numero)</MudText> @* TO DO ISA *@
+                            <MudText Typo="Typo.h6" Class="mb-2">@carta.Nome (@carta.Numero/@carta.Conjunto.Total) </MudText> 
 
                             <MudGrid Class="d-flex align-items-center justify-space-between" Style="margin-top: 8px;">
                                 <MudItem xs="6" Class="d-flex align-items-center">
@@ -35,7 +35,7 @@
                                 </MudItem>
                                 <MudItem xs="6" Class="d-flex align-items-center justify-end">
                                     <MudText Class="mr-1" Typo="Typo.body2">R$</MudText>
-                                    <MudText Typo="Typo.body2">0,34</MudText> @* TO DO ISA *@
+                                    <MudText Typo="Typo.body2">@carta.MercadoCartas.Precos.MenorPreco.ToString("C")</MudText> 
                                 </MudItem>
                             </MudGrid>
                         </MudCardContent>
