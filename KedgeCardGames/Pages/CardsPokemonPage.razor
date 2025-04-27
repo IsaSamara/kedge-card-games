@@ -5,12 +5,9 @@
 
 <MudContainer Class="mt-8" MaxWidth="MaxWidth.ExtraLarge">
 
-    <MudTextField @bind-Value="_search" Label="Pesquisar" Variant="Variant.Outlined" Adornment="Adornment.End"
-    AdornmentIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Secondary" OnKeyUp="HandleKeyDown" />
-
     <div class="d-flex justify-center mt-4 mb-4">
         <MudPagination Color="Color.Primary" Count="@_totalPaginas"
-        Selected="@_paginaAtual" SelectedChanged="TrocarPagina" />
+                       Selected="@_paginaAtual" SelectedChanged="TrocarPagina" />
     </div>
 
     <MudGrid>
@@ -26,10 +23,10 @@
             @foreach (var carta in cartas)
             {
                 <MudItem xs="2">
-                    <MudCard>
+                    <MudCard> 
                         <MudCardMedia Image="@carta.Imagens.Grande" Height="350" />
                         <MudCardContent>
-                            <MudText Typo="Typo.h6" Class="mb-2">@carta.Nome (@carta.Numero/@carta.Conjunto.Total) </MudText>
+                            <MudText Typo="Typo.h6" Class="mb-2">@carta.Nome (@carta.Numero/@carta.Conjunto.Total) </MudText> 
 
                             <MudGrid Class="d-flex align-items-center justify-space-between" Style="margin-top: 8px;">
                                 <MudItem xs="6" Class="d-flex align-items-center">
@@ -37,7 +34,8 @@
                                     <MudText Typo="Typo.body2">@carta.Conjunto.Total un.</MudText>
                                 </MudItem>
                                 <MudItem xs="6" Class="d-flex align-items-center justify-end">
-                                    <MudText Typo="Typo.body2">@carta.MercadoCartas.Precos.MenorPreco.ToString("C")</MudText>
+                                    <MudText Class="mr-1" Typo="Typo.body2">R$</MudText>
+                                    <MudText Typo="Typo.body2">@carta.MercadoCartas.Precos.MenorPreco.ToString("C")</MudText> 
                                 </MudItem>
                             </MudGrid>
                         </MudCardContent>
@@ -49,7 +47,7 @@
 
     <div class="d-flex justify-center mt-4 mb-4">
         <MudPagination Color="Color.Primary" Count="@_totalPaginas"
-        Selected="@_paginaAtual" SelectedChanged="TrocarPagina" />
+                       Selected="@_paginaAtual" SelectedChanged="TrocarPagina" />
     </div>
 
 </MudContainer>
@@ -58,7 +56,6 @@
     private List<CartaPokemonDto>? cartas = new();
     private int _paginaAtual = 1;
     private int _totalPaginas = 50;
-    public string _search = string.Empty;
 
     protected override async Task OnInitializedAsync()
     {
@@ -67,9 +64,7 @@
 
     private async Task CarregarPagina(int pagina)
     {
-        _search = _search.Replace(" ", "");
-        string? query = string.IsNullOrEmpty(_search) ? null : $"name:{_search}";
-        var resultado = await _pokemonApi.ObterCardsPokemon(pagina, 18, query);
+        var resultado = await _pokemonApi.ObterCardsPokemon(pagina, 18);
         cartas = resultado.Cartas;
     }
 
@@ -78,15 +73,5 @@
         _paginaAtual = novaPagina;
         cartas = null;
         await CarregarPagina(_paginaAtual);
-    }
-
-    private async Task HandleKeyDown(KeyboardEventArgs args)
-    {
-        if (args.Key == "Enter")
-        {
-            _paginaAtual = 1;
-            cartas = null;
-            await CarregarPagina(_paginaAtual);
-        }
     }
 }
