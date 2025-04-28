@@ -1,0 +1,41 @@
+﻿@page "/cards-yugioh"
+@inject IYgoproDeck _yugiohApi
+
+<PageTitle>Yu-Gi-Oh!</PageTitle>
+
+<MudContainer Class="mt-8" MaxWidth="MaxWidth.ExtraLarge">
+    <MudGrid>
+        @if (cartas == null || !cartas.Any())
+        {
+            @for (int i = 0; i < 18; i++)
+            {
+                <CardSkeleton />
+            }
+        }
+        else
+        {
+            @foreach (var carta in cartas)
+            {
+                <MudItem xs="2">
+                    <MudCard>
+                    </MudCard>
+                </MudItem>
+            }
+        }
+    </MudGrid>
+</MudContainer>
+
+@code {
+    private List<CartaYgoDto>? cartas = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await CarregarPagina();
+    }
+
+    private async Task CarregarPagina()
+    {
+        var resultado = await _yugiohApi.ObterCardsYuGiOh(18, 1);
+        cartas = resultado.Cartas;
+    }
+}
