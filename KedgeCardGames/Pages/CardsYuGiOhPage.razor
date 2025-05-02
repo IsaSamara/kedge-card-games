@@ -18,6 +18,19 @@
             {
                 <MudItem xs="2">
                     <MudCard>
+                        <MudCardMedia Image="@carta.Imagens[0].UrlImagem" Height="350" />
+                        <MudCardContent>
+                            <MudText Typo="Typo.h6" Class="mb-2">@carta.Nome</MudText>
+                            <MudGrid Class="d-flex align-items-center justify-space-between" Style="margin-top: 8px;">
+                                <MudItem xs="6" Class="d-flex align-items-center">
+                                    <MudIcon Icon="@Icons.Material.Filled.LocalOffer" Class="mr-1" />
+                                    <MudText Typo="Typo.body2">1 un.</MudText>
+                                </MudItem>
+                                <MudItem xs="6" Class="d-flex align-items-center justify-end">
+                                    <MudText Typo="Typo.body2">@decimal.Parse(@carta.Precos.FirstOrDefault().PrecoCardMarket).ToString("C") </MudText>
+                                </MudItem>
+                            </MudGrid>
+                        </MudCardContent>
                     </MudCard>
                 </MudItem>
             }
