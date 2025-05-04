@@ -1,5 +1,6 @@
 ﻿@page "/cards-pokemon"
 @inject IPokemonTcg _pokemonApi
+@attribute [Authorize]
 
 <PageTitle>Pokémon</PageTitle>
 
@@ -37,7 +38,9 @@
                                     <MudText Typo="Typo.body2">@carta.Conjunto.Total un.</MudText>
                                 </MudItem>
                                 <MudItem xs="6" Class="d-flex align-items-center justify-end">
-                                    <MudText Typo="Typo.body2">@carta.MercadoCartas.Precos.MenorPreco.ToString("C")</MudText>
+                                    <MudText Typo="Typo.body2">
+                                        @((carta.MercadoCartas?.Precos?.MenorPreco ?? 0m).ToString("C"))
+                                    </MudText>
                                 </MudItem>
                             </MudGrid>
                         </MudCardContent>

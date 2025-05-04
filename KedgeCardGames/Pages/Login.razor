@@ -1,0 +1,44 @@
+﻿@page "/login"
+@inject AuthenticationStateProvider AuthProvider
+@inject NavigationManager NavManager
+
+<MudContainer MaxWidth="MaxWidth.Small" Class="mt-12 mx-auto">
+    <MudGrid>
+        <MudItem xs="12">
+            <MudText Typo="Typo.h5" Align="Align.Center">Login</MudText>
+
+            <MudTextField @bind-Value="_username" Label="Usuário" Variant="Variant.Outlined" Margin="Margin.Normal" />
+            <MudTextField @bind-Value="_password" Label="Senha" InputType="InputType.Password" Variant="Variant.Outlined" Margin="Margin.Normal" />
+
+            <MudButton Variant="Variant.Filled" Color="Color.Primary"
+                       Class="mt-4 d-flex justify-center mx-auto" OnClick="SimulateLogin">
+                Entrar
+            </MudButton>
+
+            @if (_loginFailed)
+            {
+                <MudText Color="Color.Error" Typo="Typo.body2" Class="mt-2">Credenciais inválidas</MudText>
+            }
+        </MudItem>
+    </MudGrid>
+</MudContainer>
+
+@code {
+    private string _username = "";
+    private string _password = "";
+    private bool _loginFailed = false;
+
+    private void SimulateLogin()
+    {
+        if (_username == "admin" && _password == "123")
+        {
+            _loginFailed = false;
+            ((AuthProvider)AuthProvider).MarkUserAsAuthenticated(_username);
+            NavManager.NavigateTo("/");
+        }
+        else
+        {
+            _loginFailed = true;
+        }
+    }
+}

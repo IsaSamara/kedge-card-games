@@ -1,5 +1,7 @@
 using KedgeCardGames;
+using KedgeCardGames.Providers;
 using KedgeCardGames.Services.Interfaces;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MudBlazor.Services;
@@ -18,5 +20,8 @@ builder.Services.AddRefitClient<IPokemonTcg>()
 
 builder.Services.AddRefitClient<IYgoproDeck>()
     .ConfigureHttpClient(x => x.BaseAddress = new Uri("https://db.ygoprodeck.com/api"));
+
+builder.Services.AddAuthorizationCore();
+builder.Services.AddScoped<AuthenticationStateProvider, AuthProvider>();
 
 await builder.Build().RunAsync();
