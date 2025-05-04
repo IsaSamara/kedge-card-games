@@ -4,6 +4,14 @@
 <PageTitle>Yu-Gi-Oh!</PageTitle>
 
 <MudContainer Class="mt-8" MaxWidth="MaxWidth.ExtraLarge">
+
+    <MudTextField @bind-Value="_search" Label="Pesquisar" Variant="Variant.Outlined" Adornment="Adornment.End"
+                  AdornmentIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Secondary" />
+
+    <div class="d-flex justify-center mt-4 mb-4">
+        <MudPagination Color="Color.Primary" Count="@_totalPaginas"
+        Selected="@_paginaAtual" SelectedChanged="TrocarPagina" />
+    </div>
     <MudGrid>
         @if (cartas == null || !cartas.Any())
         {
@@ -16,19 +24,25 @@
         {
             @foreach (var carta in cartas)
             {
-                <MudItem xs="2">
-                    <MudCard>
-                        <MudCardMedia Image="@carta.Imagens[0].UrlImagem" Height="350" />
-                        <MudCardContent>
-                            <MudText Typo="Typo.h6" Class="mb-2">@carta.Nome</MudText>
-                            <MudGrid Class="d-flex align-items-center justify-space-between" Style="margin-top: 8px;">
+                <MudItem xs="2" lg="2">
+                    <MudCard Style="height: 100%; display: flex; flex-direction: column;">
+                        <MudCardMedia Image="@carta.Imagens[0].UrlImagem"
+                        Style="height: 350px; object-fit: cover;" />
+                        <MudCardContent Style="flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
+                            <MudText Typo="Typo.h6" Class="mb-2" TextOverflow="TextOverflow.Ellipsis">
+                                @carta.Nome
+                            </MudText>
+
+                            <MudGrid Class="d-flex align-items-center justify-space-between" Style="margin-top: auto;">
                                 <MudItem xs="6" Class="d-flex align-items-center">
                                     <MudIcon Icon="@Icons.Material.Filled.LocalOffer" Class="mr-1" />
-                                    <MudText Typo="Typo.body2">1 un.</MudText>
+                                    <MudText Typo="Typo.body2">@_random.Next(1, 30) un.</MudText>
                                 </MudItem>
+
                                 <MudItem xs="6" Class="d-flex align-items-center justify-end">
                                     <MudText Typo="Typo.body2">@decimal.Parse(@carta.Precos.FirstOrDefault().PrecoCardMarket).ToString("C") </MudText>
                                 </MudItem>
+
                             </MudGrid>
                         </MudCardContent>
                     </MudCard>
@@ -36,19 +50,37 @@
             }
         }
     </MudGrid>
+    <div class="d-flex justify-center mt-4 mb-4">
+        <MudPagination Color="Color.Primary" Count="@_totalPaginas"
+        Selected="@_paginaAtual" SelectedChanged="TrocarPagina" />
+    </div>
 </MudContainer>
 
 @code {
     private List<CartaYgoDto>? cartas = new();
+    private int _paginaAtual = 1;
+    private int _totalPaginas = 685;
+    private int _itensPorPagina = 18;
+    private Random _random = new Random();
+    public string _search = string.Empty;
 
-    protected override async Task OnInitializedAsync()
+       protected override async Task OnInitializedAsync()
     {
-        await CarregarPagina();
+        await CarregarPagina(_paginaAtual);
     }
 
-    private async Task CarregarPagina()
-    {
-        var resultado = await _yugiohApi.ObterCardsYuGiOh(18, 1);
+    private async Task CarregarPagina(int novaPagina)
+    { 
+        int offset = (novaPagina - 1) * _itensPorPagina;
+        var resultado = await _yugiohApi.ObterCardsYuGiOh(18, offset);
         cartas = resultado.Cartas;
     }
+
+    private async Task TrocarPagina(int novaPagina)
+    {
+        _paginaAtual = novaPagina;
+        cartas = null;
+        await CarregarPagina(_paginaAtual);
+    }
+
 }
