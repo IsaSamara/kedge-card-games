@@ -7,7 +7,8 @@ namespace KedgeCardGames.Services.Interfaces
     {
         [Get("/v7/cardinfo.php")]
         Task<RepostaCartasYuGiOhDto> ObterCardsYuGiOh(
-            [AliasAs("num")] int pageSize = 20,
-            [AliasAs("offset")] int page = 0);
+            [AliasAs("num")] int pageSize = 1,
+            [AliasAs("offset")] int page = 20,
+            [AliasAs("fname")] string? query = null);
     }
 }
