@@ -1,0 +1,49 @@
+﻿@page "/wishlist"
+@using KedgeCardGames.Dtos.Interfaces
+@using KedgeCardGames.Services
+@attribute [Authorize]
+
+<PageTitle>Lista de Desejos</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="mt-8">
+    <MudText Typo="Typo.h5" Class="mb-4">Minha Lista de Desejos</MudText>
+
+    <MudGrid>
+        @if (!wishlist.Any())
+        {
+            <MudText>Você ainda não adicionou cartas à sua lista de desejos.</MudText>
+        }
+        else
+        {
+            @foreach (var carta in wishlist)
+            {
+                <MudItem xs="12" sm="4" md="2">
+                    <MudCard>
+                        <MudCardMedia Image="@carta.ImagemUrl" Height="350" Style="object-fit: contain;" />
+                        <MudCardContent>
+                            <MudText Typo="Typo.subtitle1">@carta.Nome</MudText>
+                            <MudText Typo="Typo.caption">Jogo: @carta.Origem</MudText>
+                            <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error"
+                                           OnClick="@(() => Remover(carta))" />
+                        </MudCardContent>
+                    </MudCard>
+                </MudItem>
+            }
+        }
+    </MudGrid>
+</MudContainer>
+
+@code {
+    private List<ICartaDesejo> wishlist = new();
+
+    protected override void OnInitialized()
+    {
+        wishlist = WishlistService.Cartas.ToList();
+    }
+
+    private void Remover(ICartaDesejo carta)
+    {
+        WishlistService.Remover(carta.Id, carta.Origem);
+        wishlist = WishlistService.Cartas.ToList();
+    }
+}

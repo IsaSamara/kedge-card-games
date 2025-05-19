@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using KedgeCardGames.Dtos.Interfaces;
+using System.Text.Json.Serialization;
 
 namespace KedgeCardGames.Dtos
 {
@@ -8,7 +9,7 @@ namespace KedgeCardGames.Dtos
         public List<CartaYgoDto> Cartas { get; set; }
     }
 
-    public class CartaYgoDto
+    public class CartaYgoDto : ICartaDesejo
     {
         [JsonPropertyName("id")]
         public long Id { get; set; }
@@ -45,6 +46,11 @@ namespace KedgeCardGames.Dtos
 
         [JsonPropertyName("card_prices")]
         public List<PrecoCartaYgoDto> Precos { get; set; }
+
+        string ICartaDesejo.Id => this.Id.ToString();
+        string ICartaDesejo.Nome => this.Nome;
+        string ICartaDesejo.ImagemUrl => this.Imagens?.FirstOrDefault()?.UrlImagem ?? "";
+        string ICartaDesejo.Origem => "Yugioh";
     }
 
     public class ConjuntoCartaYgoDto

@@ -1,6 +1,7 @@
 ﻿@page "/cards-pokemon"
+@using KedgeCardGames.Services
+@inject ISnackbar Snackbar
 @inject IPokemonTcg _pokemonApi
-@attribute [Authorize]
 
 <PageTitle>Pokémon</PageTitle>
 
@@ -45,6 +46,11 @@
                                     </MudText>
                                 </MudItem>
                             </MudGrid>
+
+                            <MudIconButton Icon="@Icons.Material.Outlined.FavoriteBorder"
+                                           Color="Color.Secondary"
+                                           OnClick="@(() => AdicionarWishlist(carta))"
+                                           Class="mt-2 align-self-end" />
                         </MudCardContent>
                     </MudCard>
                 </MudItem>
@@ -93,5 +99,17 @@
             cartas = null;
             await CarregarPagina(_paginaAtual);
         }
+    }
+
+    private void AdicionarWishlist(CartaPokemonDto carta)
+    {
+        WishlistService.Adicionar(carta);
+
+        Snackbar.Add($"“{carta.Nome}” adicionada à lista de desejos!", Severity.Success, config =>
+        {
+            config.VisibleStateDuration = 3000;
+            config.ShowCloseIcon = true;
+            config.RequireInteraction = false;
+        });
     }
 }

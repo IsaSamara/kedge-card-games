@@ -1,4 +1,6 @@
 ﻿@page "/cards-yugioh"
+@using KedgeCardGames.Services
+@inject ISnackbar Snackbar
 @inject IYgoproDeck _yugiohApi
 
 <PageTitle>Yu-Gi-Oh!</PageTitle>
@@ -42,8 +44,13 @@
                                 <MudItem xs="6" Class="d-flex align-items-center justify-end">
                                     <MudText Typo="Typo.body2">@decimal.Parse(@carta.Precos.FirstOrDefault().PrecoCardMarket).ToString("C") </MudText>
                                 </MudItem>
-
                             </MudGrid>
+
+                            <MudIconButton Icon="@Icons.Material.Outlined.FavoriteBorder"
+                                           OnClick="@(() => AdicionarWishlist(carta))"
+                                           Color="Color.Secondary"
+                                           Class="mt-2 align-self-end" />
+      
                         </MudCardContent>
                     </MudCard>
                 </MudItem>
@@ -100,5 +107,17 @@
             cartas = null;
             await CarregarPaginaFiltro(_paginaAtual);
         }
+    }
+
+    private void AdicionarWishlist(CartaYgoDto carta)
+    {
+        WishlistService.Adicionar(carta);
+
+        Snackbar.Add($"“{carta.Nome}” adicionada à lista de desejos!", Severity.Success, config =>
+        {
+            config.VisibleStateDuration = 3000;
+            config.ShowCloseIcon = true;
+            config.RequireInteraction = false;
+        });
     }
 }
