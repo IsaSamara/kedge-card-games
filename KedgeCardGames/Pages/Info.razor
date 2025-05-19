@@ -1,0 +1,144 @@
+﻿@page "/info/{Id}"
+
+<MudBreadcrumbs Items="_items" Separator=">" />
+
+<MudPaper Class="pa-4" Elevation="4" Style="max-width: 600px; margin: auto;">
+    @if (conteudo == null)
+    {
+        <MudText Typo="Typo.h5" Color="Color.Error">Ingresso não encontrado.</MudText>
+    }
+    else
+    {
+        <MudText Typo="Typo.h4" GutterBottom="true" Align="Align.Center" Color="Color.Primary">
+            <strong>@conteudo.Titulo</strong>
+        </MudText>
+
+        <MudDivider Class="my-4" />
+
+        <MudText Typo="Typo.h6" GutterBottom="true">O QUE É?</MudText>
+        <MudText Typo="Typo.body1" GutterBottom="true" Style="white-space: pre-line;">@conteudo.Descricao</MudText>
+
+        <MudText Typo="Typo.h6" GutterBottom="true">QUANDO E QUE HORAS OCORRE?</MudText>
+        <MudText Typo="Typo.body1" GutterBottom="true" Style="white-space: pre-line;">@conteudo.Horarios</MudText>
+
+        <MudText Typo="Typo.h6" GutterBottom="true">COMO FUNCIONA?</MudText>
+        <MudText Typo="Typo.body1" GutterBottom="true" Style="white-space: pre-line;">@conteudo.Funcionamento</MudText>
+
+        <MudText Typo="Typo.h6" GutterBottom="true">PREMIAÇÃO</MudText>
+        <MudText Typo="Typo.body1" GutterBottom="true" Style="white-space: pre-line;">@conteudo.Premiacao</MudText>
+
+        <MudText Typo="Typo.h6" GutterBottom="true">LOCAL</MudText>
+        <MudText Typo="Typo.body1" GutterBottom="true" Style="white-space: pre-line;">@conteudo.Local</MudText>
+    }
+</MudPaper>
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+
+    private List<BreadcrumbItem> _items = new()
+    {
+        new BreadcrumbItem("Home", href: "/"),
+        new BreadcrumbItem("Ingressos", href: "/ingressos"),
+        new BreadcrumbItem("Info", href: null, disabled: true)
+    };
+
+    private IngressoInfo conteudo;
+
+    private Dictionary<string, IngressoInfo> dados = new()
+        {
+            ["semanal-pokemon"] = new IngressoInfo
+                {
+                Titulo = "SEMANAL POKEMON - ÉGIDE CARD GAMES",
+                Descricao = "Campeonato onde você pode testar suas habilidades em batalhas eletrizantes! Toda semana, duelistas se enfrentam em batalhas pelo topo do ranking. Traga seu baralho, desafie novos oponentes e ganhe prêmios incríveis!",
+                Horarios = @"TODAS AS QUINTAS
+                18H30 - Check-in dos participantes
+                19H00 - Rodada 1
+                TODOS OS SÁBADOS
+                14H00 - Check-in dos participantes
+                14H30 - Rodada 1",
+                Funcionamento = @"AS QUINTAS: 3 rodadas MD3 (50 min. cada rodada)
+                AOS SÁBADOS: 4 rodadas MD3 (50 min. cada rodada)
+                FORMATO: Standard - Competitivo",
+                Premiacao = @"TOP1: R$100 em créditos na loja + triple pack amigos de jornada;
+                TOP2: R$70 em créditos na loja + 1 booster amigos de jornada;
+                TOP3: R$40 em créditos na loja;
+                TOP4: 1 paçoca.
+                OBS: ""todos os participantes recebem 1 prize pack pela inscrição""",
+                Local = @"ÉGIDE CARD GAMES
+                Rua da Liberdade, 150.
+                Liberdade - São Paulo - SP
+                Ingressos disponíveis no balcão da loja."
+            },
+            ["semanal-yugioh"] = new IngressoInfo
+            {
+                Titulo = "SEMANAL YU-GI-OH - ÉGIDE CARD GAMES",
+                Descricao = "Duelo semanal com suporte oficial! Venha mostrar seu deck e desafiar novos duelistas. Ideal para jogadores competitivos e casuais!",
+                Horarios = @"TODAS AS QUARTAS
+                18H00 - Check-in
+                18H30 - Rodada 1",
+                Funcionamento = @"3 rodadas MD3
+                FORMATO: Avançado Oficial (Konami)",
+                Premiacao = @"TOP1: 2 boosters + crédito
+                TOP2: 1 booster
+                Demais: 1 OTS Pack (enquanto disponível)",
+                Local = @"ÉGIDE CARD GAMES
+                Rua da Liberdade, 150.
+                Liberdade - São Paulo - SP
+                Ingressos disponíveis no balcão da loja."
+            },
+            ["mensal-pokemon"] = new IngressoInfo
+            {
+                Titulo = "MENSAL POKEMON - ÉGIDE CARD GAMES",
+                Descricao = "Evento especial com premiação maior! Ideal para quem quer competir por prêmios valiosos e subir no ranking local.",
+                Horarios = @"TODO ÚLTIMO SÁBADO DO MÊS
+                13H00 - Check-in
+                13H30 - Início do torneio",
+                Funcionamento = @"5 rodadas MD3 (50 min. cada rodada)
+                FORMATO: Standard - Competitivo",
+                Premiacao = @"TOP1: R$100 em crédito + booster box rivais predestinados
+                TOP2: R$80 em crédito + 2 triple packs amigos de jornada
+                TOP3: R$60 em crédito + 1 triple pack amigos de jornada
+                TOP4: R$50 em crédito
+                OBS: ""todos os participantes recebem 1 prize pack pela inscrição",
+                Local = @"ÉGIDE CARD GAMES
+                Rua da Liberdade, 150.
+                Liberdade - São Paulo - SP
+                Ingressos disponíveis no balcão da loja."
+            },
+            ["mensal-yugioh"] = new IngressoInfo
+            {
+                Titulo = "MENSAL YU-GI-OH - ÉGIDE CARD GAMES",
+                Descricao = "Evento mensal com alto nível competitivo. Venha disputar premiações maiores e mostrar sua estratégia!",
+                Horarios = @"TODO 1º DOMINGO DO MÊS
+                13H00 - Check-in
+                13H30 - Início das partidas",
+                Funcionamento = @"5 rodadas MD3
+                FORMATO: Avançado Oficial (Konami)",
+                Premiacao = @"TOP1: Tablet Samsung
+                TOP2: Headset
+                TOP3: 5 boosters
+                Demais: OTS Pack",
+                Local = @"ÉGIDE CARD GAMES
+                Rua da Liberdade, 150.
+                Liberdade - São Paulo - SP
+                Ingressos disponíveis no balcão da loja."
+            }
+        };
+
+    protected override void OnParametersSet()
+    {
+        conteudo = dados.TryGetValue(Id?.ToLower(), out var info) ? info : null;
+    }
+
+    class IngressoInfo
+    {
+        public string Titulo { get; set; }
+        public string Descricao { get; set; }
+        public string Horarios { get; set; }
+        public string Funcionamento { get; set; }
+        public string Premiacao { get; set; }
+        public string Local { get; set; }
+    }
+
+}

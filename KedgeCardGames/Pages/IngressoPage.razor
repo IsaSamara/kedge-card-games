@@ -1,7 +1,84 @@
 ﻿@page "/ingressos"
 
-<h3>Ingressos</h3>
+<MudBreadcrumbs Items="_items" Separator=">" />
 
-@code {
+<MudGrid GutterSize="24" Style="padding: 100px;">
+    <MudItem xs="12" sm="3">
+        <MudLink Href="/info/semanal-pokemon" Style="text-decoration: none;">
+            <MudCard Style="width: 350px; height: auto;">
+                <MudCardMedia Image="IngPokeSem.png" Style="width: 100%"/>
+                <MudCardContent>
+                    <MudDivider />
+                    <MudText Typo="Typo.subtitle2" Align="Align.Center" Class="mt-2">SEMANAL POKÉMON</MudText>
+                    <MudDivider />
+                    <MudStack Direction="Row" Justify="Justify.SpaceBetween" Class="mt-2">
+                        <MudText Typo="Typo.body2">100 un.</MudText>
+                        <MudText Typo="Typo.body2">R$ 20,00</MudText>
+                    </MudStack>
+                </MudCardContent>
+            </MudCard>
+        </MudLink>
+    </MudItem>
 
+    <MudItem xs="12" sm="3">
+        <MudLink Href="/info/semanal-yugioh" Style="text-decoration: none;">
+            <MudCard Style="width: 350px; height: auto;">
+                <MudCardMedia Image="SemYugi.png" Style="width: 100%"/>
+                <MudCardContent>
+                    <MudDivider />
+                    <MudText Typo="Typo.subtitle2" Align="Align.Center" Class="mt-2">SEMANAL YU-GI-OH</MudText>
+                    <MudDivider />
+                    <MudStack Direction="Row" Justify="Justify.SpaceBetween" Class="mt-2">
+                        <MudText Typo="Typo.body2">100 un.</MudText>
+                        <MudText Typo="Typo.body2">R$ 40,00</MudText>
+                    </MudStack>
+                </MudCardContent>
+            </MudCard>
+        </MudLink>
+    </MudItem>
+
+    <MudItem xs="12" sm="3">
+        <MudLink Href="/info/mensal-pokemon" Style="text-decoration: none;">
+            <MudCard Style="width: 350px; height: auto;">
+                <MudCardMedia Image="MenPoke.png" Style="width: 100%" />
+                <MudCardContent>
+                    <MudDivider />
+                    <MudText Typo="Typo.subtitle2" Align="Align.Center" Class="mt-2">MENSAL POKÉMON</MudText>
+                    <MudDivider />
+                    <MudStack Direction="Row" Justify="Justify.SpaceBetween" Class="mt-2">
+                        <MudText Typo="Typo.body2">30 un.</MudText>
+                        <MudText Typo="Typo.body2">R$ 45,00</MudText>
+                    </MudStack>
+                </MudCardContent>
+            </MudCard>
+        </MudLink>
+    </MudItem>
+
+    <MudItem xs="12" sm="3" >
+        <MudLink Href="/info/mensal-yugioh" Style="text-decoration: none;">
+            <MudCard Style="width: 350px; height: auto;">
+                <MudCardMedia Image="MenYugioh.png" Style="width: 100%" />
+                <MudCardContent>
+                    <MudDivider />
+                    <MudText Typo="Typo.subtitle2" Align="Align.Center" Class="mt-2">MENSAL YU-GI-OH</MudText>
+                    <MudDivider />
+                    <MudStack Direction="Row" Justify="Justify.SpaceBetween" Class="mt-2">
+                        <MudText Typo="Typo.body2">30 un.</MudText>
+                        <MudText Typo="Typo.body2">R$ 65,00</MudText>
+                    </MudStack>
+                </MudCardContent>
+            </MudCard>
+        </MudLink>
+    </MudItem>
+</MudGrid>
+
+@code{
+
+
+        private List<BreadcrumbItem> _items = new()
+    {
+        new BreadcrumbItem("Home", href: "/"),
+        new BreadcrumbItem("Ingressos", href: "/ingressos")
+    };
+    
 }
