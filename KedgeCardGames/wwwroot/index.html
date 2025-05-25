@@ -4,10 +4,17 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>KedgeCardGames</title>
+    <title>CardGames</title>
     <base href="/" />
+    <script>
+        if (window.location.hostname === "localhost") {
+            document.write('<base href="/" />');
+        } else {
+            document.write('<base href="https://isasamara.github.io/kedge-card-games/" />')
+        } 
+    </script>
     <link rel="stylesheet" href="css/app.css" />
-    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="icon" type="image/png" href="logo.png">
     <link href="KedgeCardGames.styles.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <link href="_content/MudBlazor/MudBlazor.min.css" rel="stylesheet" />
