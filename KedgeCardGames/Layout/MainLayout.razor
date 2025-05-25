@@ -15,12 +15,34 @@
 <MudLayout>
     <MudAppBar>
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
-        Kedge Card Games
+        <a href="/">
+            <img src="logo.png" alt="Logo" style="height:60px; margin-left: 5px;" />
+        </a>
+         Card Games
         <MudSpacer />
+            <MudToolbar>
+            <MudMenu Label="YU-GI-OH!" EndIcon="@Icons.Material.Filled.ArrowDropDown" Color="Color.Inherit" Dense="true">
+                    <MudMenuItem Href="/cards-yugioh">Cartas</MudMenuItem>
+                </MudMenu>
+
+            <MudMenu Label="POKÉMON" EndIcon="@Icons.Material.Filled.ArrowDropDown" Color="Color.Inherit" Dense="true">
+                    <MudMenuItem Href="/cards-pokemon">Cartas</MudMenuItem>
+                </MudMenu>
+
+                <MudButton Href="/ingressos" Color="Color.Inherit" Variant="Variant.Text">
+                    INGRESSOS
+                </MudButton>
+            </MudToolbar>
         <MudToggleIconButton @bind-Toggled="@_isDarkMode"
                              Icon="@Icons.Material.Filled.DarkMode" Color="@Color.Default"
                              ToggledIcon="@Icons.Material.Filled.WbSunny" ToggledColor="@Color.Default" />
 
+        @if (_isAuthenticated == false)
+        {
+            <MudButton Href="Login" Variant="Variant.Text" Color="Color.Inherit" StartIcon="@Icons.Material.Rounded.Login">
+                Entrar
+            </MudButton>
+        }
         @if (_isAuthenticated)
         {
             <MudButton OnClick="Logout" Variant="Variant.Text" Color="Color.Inherit" StartIcon="@Icons.Material.Filled.Logout">

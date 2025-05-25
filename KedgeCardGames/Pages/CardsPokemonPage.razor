@@ -5,6 +5,8 @@
 
 <PageTitle>Pokémon</PageTitle>
 
+<MudBreadcrumbs Items="_items" Separator=">" />
+
 <MudContainer Class="mt-8" MaxWidth="MaxWidth.ExtraLarge">
 
     <MudTextField @bind-Value="_search" Label="Pesquisar" Variant="Variant.Outlined" Adornment="Adornment.End"
@@ -29,10 +31,10 @@
             {
                 <MudItem xs="2">
                     <MudCard Style="width: 100%;">
-                        <MudCardMedia Image="@carta.Imagens.Grande" Height="350" Style="object-fit: cover;" />
+                        <MudCardMedia Image="@carta.Imagens.Grande" Height="400" Style="object-fit: contain;" />
 
                         <MudCardContent Style="display: flex; flex-direction: column; justify-content: space-between;">
-                            <MudText Typo="Typo.subtitle1">@carta.Nome (@carta.Numero/@carta.Conjunto.Total)</MudText>
+                            <MudText Typo="Typo.subtitle1">@(carta.Nome.Length > 20 ? carta.Nome.Substring(0, 20) + "..." : carta.Nome)(@carta.Numero/@carta.Conjunto.Total)</MudText>
 
                             <MudGrid Class="d-flex align-items-center justify-space-between" Style="margin-top: 8px;">
                                 <MudItem xs="6" Class="d-flex align-items-center">
@@ -57,7 +59,7 @@
             }
         }
     </MudGrid>
-
+    
     <div class="d-flex justify-center mt-4 mb-4">
         <MudPagination Color="Color.Primary" Count="@_totalPaginas"
         Selected="@_paginaAtual" SelectedChanged="TrocarPagina" />
@@ -112,4 +114,10 @@
             config.RequireInteraction = false;
         });
     }
+
+    private List<BreadcrumbItem> _items = new()
+    {
+        new BreadcrumbItem("Home", href: "/"),
+        new BreadcrumbItem("Pokémon", href: "/cards-pokemon")
+    };
 }

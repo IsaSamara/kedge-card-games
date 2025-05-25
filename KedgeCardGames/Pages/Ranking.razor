@@ -1,0 +1,92 @@
+﻿@page "/ranking"
+
+<MudBreadcrumbs Items="_items" Separator=">" />
+
+<h1 style="text-align: center;"><strong>Ranking Pokémon</strong></h1>
+<h2 style="text-align: center;">🏆 Melhores duelistas do mês!</h2>
+<h3 style="text-align: center;">Fora do ranking? Não desanime. Bora treinar pra entrar no próximo!</h3>
+
+<MudPaper Class="pa-4" style="margin:50px;">
+    <MudTable Items="@jogadores.Take(10)" Hover="true" Breakpoint="Breakpoint.Sm" Loading="@_loading" LoadingProgressColor="Color.Info">
+        <HeaderContent>
+            <MudTh>Posição</MudTh>
+            <MudTh>Nome</MudTh>
+            <MudTh>Pontos</MudTh>
+        </HeaderContent>
+
+        <RowTemplate Context="jogador">
+            <MudTd DataLabel="Posição">
+                @if (jogador.Posicao == 1)
+                {
+                    <span style="color: gold;">🥇 @jogador.Posicao</span>
+                }
+                else if (jogador.Posicao == 2)
+                {
+                    <span style="color: silver;">🥈 @jogador.Posicao</span>
+                }
+                else if (jogador.Posicao == 3)
+                {
+                    <span style="color: #cd7f32;">🥉 @jogador.Posicao</span>
+                }
+                else
+                {
+                    @jogador.Posicao
+                }
+            </MudTd>
+
+            <MudTd DataLabel="Nome">
+                <MudTooltip Text="@jogador.Descricao">
+                    <span style="cursor: help;">@jogador.Nome</span>
+                </MudTooltip>
+            </MudTd>
+
+            <MudTd DataLabel="Pontos">
+                <div>@jogador.Pontos pts</div>
+            </MudTd>
+        </RowTemplate>
+    </MudTable>
+</MudPaper>
+
+<MudPaper Class="pa-4 mt-6" Style="text-align: center;">
+    <MudCard Style="max-width: 400px; margin: auto;">
+        <MudCardContent>
+            <MudText Typo="Typo.h6">🃏 Curte duelos de Yu-Gi-Oh!?</MudText>
+            <MudText Typo="Typo.subtitle2" Class="mb-2">Veja o ranking dos duelistas lendários!</MudText>
+            <MudButton Href="/ranking-yugioh" Color="Color.Secondary" Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.SportsEsports">
+                Ver ranking YU-GI-OH!
+            </MudButton>
+        </MudCardContent>
+    </MudCard>
+</MudPaper>
+
+@code {
+    private bool _loading = false;
+
+    private List<Jogador> jogadores = new List<Jogador>
+    {
+        new Jogador { Posicao = 1, Nome = "Matsu", Pontos = 150, Descricao = "Mestre das mecânicas. Sempre no top 3!" },
+        new Jogador { Posicao = 2, Nome = "Ryu", Pontos = 120 },
+        new Jogador { Posicao = 3, Nome = "Lara", Pontos = 110 },
+        new Jogador { Posicao = 4, Nome = "Zara", Pontos = 90 },
+        new Jogador { Posicao = 5, Nome = "Ken", Pontos = 80 },
+        new Jogador { Posicao = 6, Nome = "João", Pontos = 75 },
+        new Jogador { Posicao = 7, Nome = "Wesley", Pontos = 60 },
+        new Jogador { Posicao = 8, Nome = "Alex", Pontos = 58 },
+        new Jogador { Posicao = 9, Nome = "Mari", Pontos = 55 },
+        new Jogador { Posicao = 10, Nome = "Lucas", Pontos = 53 }
+    };
+
+    public class Jogador
+    {
+        public int Posicao { get; set; }
+        public string Nome { get; set; }
+        public int Pontos { get; set; }
+        public string Descricao { get; set; }
+    }
+
+        private List<BreadcrumbItem> _items = new()
+    {
+        new BreadcrumbItem("Home", href: "/"),
+        new BreadcrumbItem("Rank", href: "/ranking")
+    };
+}

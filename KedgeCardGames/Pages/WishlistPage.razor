@@ -5,6 +5,8 @@
 
 <PageTitle>Lista de Desejos</PageTitle>
 
+<MudBreadcrumbs Items="_items" Separator=">" />
+
 <MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="mt-8">
     <MudText Typo="Typo.h5" Class="mb-4">Minha Lista de Desejos</MudText>
 
@@ -46,4 +48,10 @@
         WishlistService.Remover(carta.Id, carta.Origem);
         wishlist = WishlistService.Cartas.ToList();
     }
+
+        private List<BreadcrumbItem> _items = new()
+    {
+        new BreadcrumbItem("Home", href: "/"),
+        new BreadcrumbItem("Lista de desejos", href: "/wishlist")
+    };
 }
