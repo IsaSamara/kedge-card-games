@@ -34,7 +34,7 @@
         {
             _loginFailed = false;
             ((AuthProvider)AuthProvider).MarkUserAsAuthenticated(_username);
-            NavManager.NavigateTo("/");
+            NavManager.NavigateTo("home");
         }
         else
         {

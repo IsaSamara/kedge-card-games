@@ -90,7 +90,7 @@
     private void Logout()
     {
         ((AuthProvider)AuthProvider).MarkUserAsLoggedOut();
-        NavManager.NavigateTo("/", true);
+        NavManager.NavigateTo("home", true);
     }
 
     MudTheme CustomTheme = new MudTheme()
