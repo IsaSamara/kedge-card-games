@@ -52,7 +52,7 @@
         <MudCardContent>
             <MudText Typo="Typo.h6">🃏 Curte duelos de Yu-Gi-Oh!?</MudText>
             <MudText Typo="Typo.subtitle2" Class="mb-2">Veja o ranking dos duelistas lendários!</MudText>
-            <MudButton Href="/ranking-yugioh" Color="Color.Secondary" Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.SportsEsports">
+            <MudButton Href="ranking-yugioh" Color="Color.Secondary" Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.SportsEsports">
                 Ver ranking YU-GI-OH!
             </MudButton>
         </MudCardContent>
@@ -86,7 +86,7 @@
 
         private List<BreadcrumbItem> _items = new()
     {
-        new BreadcrumbItem("Home", href: "/"),
-        new BreadcrumbItem("Rank", href: "/ranking")
+        new BreadcrumbItem("Home", href: null, true),
+        new BreadcrumbItem("Rank", href: null, true)
     };
 }

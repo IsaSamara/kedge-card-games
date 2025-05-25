@@ -52,7 +52,7 @@
                 <MudCardContent>
                     <MudText Typo="Typo.h6">🔁 Quer ver os melhores do Pokémon?</MudText>
                     <MudText Typo="Typo.subtitle2" Class="mb-2">Confira os melhores jogadores de Pokémon!</MudText>
-                    <MudButton Href="/ranking" Color="Color.Secondary" Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.CatchingPokemon">
+                    <MudButton Href="ranking" Color="Color.Secondary" Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.CatchingPokemon">
                         Ver ranking POKÉMON
                     </MudButton>
                 </MudCardContent>
@@ -86,7 +86,7 @@
 
     private List<BreadcrumbItem> _items = new()
     {
-        new BreadcrumbItem("Home", href: "/"),
-        new BreadcrumbItem("Rank", href: "/ranking")
+        new BreadcrumbItem("Home", href: null, true),
+        new BreadcrumbItem("Rank", href: null, true)
     };
 }
