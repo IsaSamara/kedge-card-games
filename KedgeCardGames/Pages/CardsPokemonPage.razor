@@ -29,9 +29,9 @@
         {
             @foreach (var carta in cartas)
             {
-                <MudItem xs="2">
+                <MudItem xs="12" sm="6" md="4" lg="2">
                     <MudCard Style="width: 100%;">
-                        <MudCardMedia Image="@carta.Imagens.Grande" Height="400" Style="object-fit: contain;" />
+                        <MudImage Src="@carta.Imagens.Grande" Alt="Carta" Style="width: 100%; height: auto; object-fit: contain;"/>
 
                         <MudCardContent Style="display: flex; flex-direction: column; justify-content: space-between;">
                             <MudText Typo="Typo.subtitle1">@(carta.Nome.Length > 20 ? carta.Nome.Substring(0, 20) + "..." : carta.Nome)(@carta.Numero/@carta.Conjunto.Total)</MudText>
@@ -104,16 +104,16 @@
     }
 
     private void AdicionarWishlist(CartaPokemonDto carta)
-    {
-        WishlistService.Adicionar(carta);
-
-        Snackbar.Add($"“{carta.Nome}” adicionada à lista de desejos!", Severity.Success, config =>
         {
-            config.VisibleStateDuration = 3000;
-            config.ShowCloseIcon = true;
-            config.RequireInteraction = false;
-        });
-    }
+            WishlistService.Adicionar(carta);
+
+            Snackbar.Add($"“{carta.Nome}” adicionada à lista de desejos!", Severity.Success, config =>
+            {
+                config.VisibleStateDuration = 3000;
+                config.ShowCloseIcon = true;
+                config.RequireInteraction = false;
+            });
+        }
 
     private List<BreadcrumbItem> _items = new()
     {

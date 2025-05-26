@@ -2,20 +2,20 @@
 
 <PageTitle>Início</PageTitle>
 
-<MudCarousel Class="mud-width-full" Style="height:500px;" ShowArrows="@arrows" ShowBullets="@bullets" EnableSwipeGesture="@enableSwipeGesture" AutoCycle="@autocycle" TData="object">
+<MudCarousel Class="mud-width-full" Style="height: 500px;" ShowArrows="@arrows" ShowBullets="@bullets" EnableSwipeGesture="@enableSwipeGesture" AutoCycle="@autocycle" TData="object">
     <MudCarouselItem Transition="transition">
-        <div class="d-flex" style="height:100%">
-            <MudImage Src="rivais.png" Alt="Imagem do Carousel" Class="mx-auto my-auto" MaxWidth="100%" Style="width: 1000px; height: 500px;" />
+        <div class="d-flex justify-center align-center" style="height: 100%;">
+            <MudImage Src="rivais.png" Alt="Imagem do Carousel" Style="max-width: 100%; height: auto; max-height: 500px;" />
         </div>
     </MudCarouselItem>
     <MudCarouselItem Transition="transition">
-        <div class="d-flex" style="height:100%">
-            <MudImage Src="yugioh-banner.png" Alt="Imagem do Carousel" Class="mx-auto my-auto" MaxWidth="100%" Style="width: 1000px; height: 500px;" />
+        <div class="d-flex justify-center align-center" style="height: 100%;">
+            <MudImage Src="yugioh-banner.png" Alt="Imagem do Carousel" Style="max-width: 100%; height: auto; max-height: 500px;" />
         </div>
     </MudCarouselItem>
     <MudCarouselItem Transition="transition">
-        <div class="d-flex" style="height:100%">
-            <MudImage Src="one-piece-tcg.png" Alt="Imagem do Carousel" Class="mx-auto my-auto" MaxWidth="100%" Style="width:1000px; height: 500px;" />
+        <div class="d-flex justify-center align-center" style="height: 100%;">
+            <MudImage Src="one-piece-tcg.png" Alt="Imagem do Carousel" Style="max-width: 100%; height: auto; max-height: 500px;" />
         </div>
     </MudCarouselItem>
 </MudCarousel>
@@ -26,5 +26,4 @@
     private bool enableSwipeGesture = true;
     private bool autocycle = true;
     private Transition transition = Transition.Slide;
-
 }

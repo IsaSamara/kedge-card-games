@@ -20,27 +20,35 @@
         </a>
          Card Games
         <MudSpacer />
-            <MudToolbar>
-            <MudMenu Label="YU-GI-OH!" EndIcon="@Icons.Material.Filled.ArrowDropDown" Color="Color.Inherit" Dense="true">
+            <MudHidden Breakpoint="Breakpoint.SmAndDown">
+                <MudMenu Label="YU-GI-OH!" EndIcon="@Icons.Material.Filled.ArrowDropDown" Color="Color.Inherit" Dense="true">
                     <MudMenuItem Href="cards-yugioh">Cartas</MudMenuItem>
                 </MudMenu>
 
-            <MudMenu Label="POKÉMON" EndIcon="@Icons.Material.Filled.ArrowDropDown" Color="Color.Inherit" Dense="true">
+                <MudMenu Label="POKÉMON" EndIcon="@Icons.Material.Filled.ArrowDropDown" Color="Color.Inherit" Dense="true">
                     <MudMenuItem Href="cards-pokemon">Cartas</MudMenuItem>
                 </MudMenu>
 
                 <MudButton Href="ingressos" Color="Color.Inherit" Variant="Variant.Text">
                     INGRESSOS
                 </MudButton>
-            </MudToolbar>
+            </MudHidden>
+
+            <MudHidden Breakpoint="Breakpoint.MdAndUp">
+                <MudMenu Icon="@Icons.Material.Filled.KeyboardArrowDown" Color="Color.Inherit" Dense="true">
+                    <MudMenuItem Href="cards-yugioh">YU-GI-OH! - Cartas</MudMenuItem>
+                    <MudMenuItem Href="cards-pokemon">POKÉMON - Cartas</MudMenuItem>
+                    <MudMenuItem Href="ingressos">INGRESSOS</MudMenuItem>
+                </MudMenu>
+            </MudHidden>
+
         <MudToggleIconButton @bind-Toggled="@_isDarkMode"
                              Icon="@Icons.Material.Filled.DarkMode" Color="@Color.Default"
                              ToggledIcon="@Icons.Material.Filled.WbSunny" ToggledColor="@Color.Default" />
 
         @if (_isAuthenticated == false)
         {
-            <MudButton Href="Login" Variant="Variant.Text" Color="Color.Inherit" StartIcon="@Icons.Material.Rounded.Login">
-                Entrar
+            <MudButton Href="Login" Variant="Variant.Text" Color="Color.Inherit" StartIcon="@Icons.Material.Rounded.Login">              
             </MudButton>
         }
         @if (_isAuthenticated)

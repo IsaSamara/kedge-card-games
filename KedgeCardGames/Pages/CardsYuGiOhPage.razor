@@ -28,10 +28,9 @@
         {
             @foreach (var carta in cartas)
             {
-                <MudItem xs="2" lg="2">
+                <MudItem xs="12" sm="6" md="4" lg="2">
                     <MudCard Style="height: 100%; display: flex; flex-direction: column;">
-                        <MudCardMedia Image="@carta.Imagens[0].UrlImagem"
-                        Style="height: 400px; object-fit: contain;" />
+                        <MudImage Src="@carta.Imagens[0].UrlImagem" Alt="Carta" Style="width: 100%; height: auto; object-fit: contain;"/>
                         <MudCardContent Style="flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
                             <MudText Typo="Typo.h6" Class="mb-2" TextOverflow="TextOverflow.Ellipsis">
                                 @(carta.Nome.Length > 20 ? carta.Nome.Substring(0, 20) + "..." : carta.Nome)
